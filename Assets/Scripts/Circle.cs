@@ -1,71 +1,84 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Circle : MonoBehaviour {
 
-	static int _rotationAngle = 45;
+	private static int rotationAngle = 45;
 
-	Image _image;
+	private Image image;
 
-	RectTransform _transform;
+	private RectTransform transform;
 
-	bool _rotating = false;
+	private bool rotating = false;
 
 	[SerializeField]
-	float _rotationSpeed = 1;
+	private float rotationSpeed = 1;
 
-	public Color color {
+	public Color Color {
 		get {
-			if(_image == null)
+			if(image == null)
 				return Color.white;
 
-			return _image.color;
+			return image.color;
 		}
 
 		set {
-			if(_image == null)
+			if(image == null)
 				return;
 
-			_image.color = value;
+			image.color = value;
+		}
+	}
+
+	public bool Rotating {
+		get {
+			return rotating;
+		}
+
+		set {
+			rotating = value;
 		}
 	}
 
 	private void Start() {
-		_image = GetComponent<Image>();
-		_transform = GetComponent<RectTransform>();
+		image = GetComponent<Image>();
+		transform = GetComponent<RectTransform>();
+	}
+
+	public void GenerateIcons() {
+
 	}
 
 	public void Generate() {
-		// Place images
+		// Place icons
 	}
 
 	public void MoveLeft() {
-		StartCoroutine(Move(-_rotationAngle));
+		StartCoroutine(Move(-rotationAngle));
 	}
 
 	public void MoveRight() {
-		StartCoroutine(Move(_rotationAngle));
+		StartCoroutine(Move(rotationAngle));
 	}
 
 	IEnumerator Move(float addedAngle) {
-		if(!_rotating) {
-			_rotating = true;
+		if(!rotating) {
+			rotating = true;
 
-			Quaternion goalAngle = _transform.rotation * Quaternion.Euler(0, 0, addedAngle);
-			Quaternion startAngle = _transform.rotation;
+			Quaternion goalAngle = transform.rotation * Quaternion.Euler(0, 0, addedAngle);
+			Quaternion startAngle = transform.rotation;
 
 			float position = 0;
 
 			while(position < 1) {
-				position += Time.deltaTime * _rotationSpeed;
-				_transform.rotation = Quaternion.Lerp(startAngle, goalAngle, position);
+				position += Time.deltaTime * rotationSpeed;
+				transform.rotation = Quaternion.Lerp(startAngle, goalAngle, position);
 				yield return new WaitForEndOfFrame();
 			}
 
-			_transform.rotation = goalAngle;
-			_rotating = false;
+			transform.rotation = goalAngle;
+			rotating = false;
 		}
 	}
 }

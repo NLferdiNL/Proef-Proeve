@@ -1,77 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DebugMovement : MonoBehaviour {
 
-	int selectedCircleIndex = 0;
+	private int selectedCircleIndex = 0;
 
 	[SerializeField]
-	Circle[] circles = new Circle[3];
+	private Circle[] circles = new Circle[3];
 
-	Circle selectedCircle {
+	private Circle selectedCircle {
 		get {
 			return circles[selectedCircleIndex];
 		}
 	}
 
 	[SerializeField]
-	Color selectedColor, regularColor;
+	private Color selectedColor, regularColor;
 
 	private void Start() {
-		selectedCircle.color = selectedColor;
+		selectedCircle.Color = selectedColor;
 	}
 
 	private void FixedUpdate() {
 		bool left, right, up, down = false;
 
-		left = Input.GetKeyDown(KeyCode.A);
-		right = Input.GetKeyDown(KeyCode.D);
+		left = Input.GetKey(KeyCode.A);
+		right = Input.GetKey(KeyCode.D);
 		up = Input.GetKeyDown(KeyCode.W);
 		down = Input.GetKeyDown(KeyCode.S);
 
-		if (left && right)
-			left = right = false;
+		if(!selectedCircle.Rotating) {
+			if(left && right)
+				left = right = false;
 
-		if (up && down)
-			up = down = false;
+			if(up && down)
+				up = down = false;
 
-		if(left)
-			MoveRight();
+			if(left)
+				MoveRight();
 
-		if(right)
-			MoveLeft();
+			if(right)
+				MoveLeft();
 
-		if(up || down)
-			ResetColorFromCircle();
+			if(up || down)
+				ResetColorFromCircle();
 
-		if(up)
-			selectedCircleIndex--;
+			if(up)
+				selectedCircleIndex--;
 
-		if(down)
-			selectedCircleIndex++;
+			if(down)
+				selectedCircleIndex++;
 
-		if(selectedCircleIndex <= -1)
-			selectedCircleIndex = circles.Length - 1;
-		else if(selectedCircleIndex >= circles.Length)
-			selectedCircleIndex = 0;
+			if(selectedCircleIndex <= -1)
+				selectedCircleIndex = circles.Length - 1;
+			else if(selectedCircleIndex >= circles.Length)
+				selectedCircleIndex = 0;
 
-		SetColorToCircle();
+			SetColorToCircle();
+		}
 	}
 
-	void MoveLeft() {
+	private void MoveLeft() {
 		selectedCircle.MoveLeft();
 	}
 
-	void MoveRight() {
+	private void MoveRight() {
 		selectedCircle.MoveRight();
 	}
 
-	void ResetColorFromCircle() {
-		selectedCircle.color = regularColor;
+	private void ResetColorFromCircle() {
+		selectedCircle.Color = regularColor;
 	}
 
-	void SetColorToCircle() {
-		selectedCircle.color = selectedColor;
+	private void SetColorToCircle() {
+		selectedCircle.Color = selectedColor;
 	}
 }
