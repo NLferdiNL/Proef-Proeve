@@ -20,19 +20,28 @@ public class IconClass : MonoBehaviour {
 
 	public IconObject.Shading shading {
 		get {
-			return icon.shading;
+			if(icon != null)
+				return icon.shading;
+
+			return IconObject.Shading.open;
 		}
 	}
 
 	public IconObject.Shape shape {
 		get {
-			return icon.shape;
+			if(icon != null)
+				return icon.shape;
+
+			return IconObject.Shape.diamond;
 		}
 	}
 
 	public IconObject.Color color {
 		get {
-			return icon.color;
+			if(icon != null)
+				return icon.color;
+
+			return IconObject.Color.green;
 		}
 	}
 
@@ -42,8 +51,8 @@ public class IconClass : MonoBehaviour {
 		}
 
 		set {
-			UpdateSprites();
 			icon = value;
+			UpdateSprites();
 		}
 	}
 
@@ -52,13 +61,13 @@ public class IconClass : MonoBehaviour {
 
 		switch(shape) {
 			case IconObject.Shape.diamond:
-				newSprite = IconContainer.Instance.DiamondEdgeSprite;
+				newSprite = IconAssetData.Instance.DiamondEdgeSprite;
 				break;
 			case IconObject.Shape.oval:
-				newSprite = IconContainer.Instance.OvalEdgeSprite;
+				newSprite = IconAssetData.Instance.OvalEdgeSprite;
 				break;
 			case IconObject.Shape.squiggle:
-				newSprite = IconContainer.Instance.SquiggleEdgeSprite;
+				newSprite = IconAssetData.Instance.SquiggleEdgeSprite;
 				break;
 		}
 
@@ -67,13 +76,13 @@ public class IconClass : MonoBehaviour {
 
 		switch(shading) {
 			case IconObject.Shading.open:
-				newSprite = IconContainer.Instance.OpenShadingSprite;
+				newSprite = IconAssetData.Instance.OpenShadingSprite;
 				break;
 			case IconObject.Shading.solid:
-				newSprite = IconContainer.Instance.SolidShadingSprite;
+				newSprite = IconAssetData.Instance.SolidShadingSprite;
 				break;
 			case IconObject.Shading.striped:
-				newSprite = IconContainer.Instance.StripedShadingSprite;
+				newSprite = IconAssetData.Instance.StripedShadingSprite;
 				break;
 		}
 
@@ -83,13 +92,13 @@ public class IconClass : MonoBehaviour {
 
 		switch(color) {
 			case IconObject.Color.green:
-				newColor = IconContainer.Instance.GreenColor;
+				newColor = IconAssetData.Instance.GreenColor;
 				break;
 			case IconObject.Color.purple:
-				newColor = IconContainer.Instance.PurpleColor;
+				newColor = IconAssetData.Instance.PurpleColor;
 				break;
 			case IconObject.Color.red:
-				newColor = IconContainer.Instance.RedColor;
+				newColor = IconAssetData.Instance.RedColor;
 				break;
 		}
 
@@ -128,7 +137,7 @@ public class IconClass : MonoBehaviour {
 			return true;
 
 		// All unique
-		if(a != b && b != c)
+		if(a != b && a != c && b != c)
 			return true;
 
 		return false;

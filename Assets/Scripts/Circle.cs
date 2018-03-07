@@ -4,17 +4,26 @@ using UnityEngine.UI;
 
 public class Circle : MonoBehaviour {
 
-	private static int rotationAngle = 45;
+	private IconClass[] icons;
+
+	private int rotationAngle = 45;
+
+	[SerializeField]
+	private int iconsInCircle = 8;
+
+	private float currentAngle = 0;
 
 	private Image image;
 
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 	private RectTransform transform;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
 	private bool rotating = false;
 
 	[SerializeField]
 	private float rotationSpeed = 1;
-
+	
 	public Color Color {
 		get {
 			if(image == null)
@@ -44,14 +53,16 @@ public class Circle : MonoBehaviour {
 	private void Start() {
 		image = GetComponent<Image>();
 		transform = GetComponent<RectTransform>();
+		rotationAngle = 360 / iconsInCircle;
 	}
 
 	public void GenerateIcons() {
+		icons = new IconClass[iconsInCircle];
+		
+		for(int i = 0; i < iconsInCircle; i++) {
+			GameObject iconContainer = Instantiate(IconAssetData.Instance.IconPrefab, Vector3.zero, Quaternion.identity, transform);
 
-	}
-
-	public void Generate() {
-		// Place icons
+		}
 	}
 
 	public void MoveLeft() {
@@ -78,6 +89,7 @@ public class Circle : MonoBehaviour {
 			}
 
 			transform.rotation = goalAngle;
+			currentAngle = goalAngle.z;
 			rotating = false;
 		}
 	}

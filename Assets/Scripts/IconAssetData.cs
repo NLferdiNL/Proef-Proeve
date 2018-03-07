@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class IconContainer : MonoBehaviour {
+public class IconAssetData : MonoBehaviour {
 
-	static IconContainer instance;
+	[SerializeField]
+	IconObject[] iconObjects;
 
-	public static IconContainer Instance {
+	static IconAssetData instance;
+
+	public static IconAssetData Instance {
 		get {
 			if(instance == null)
-				instance = FindObjectOfType<IconContainer>();
+				instance = FindObjectOfType<IconAssetData>();
 
 			return instance;
 		}
 	}
-
-	public IconObject[] icons;
 
 	[SerializeField]
 	private Sprite squiggleEdgeSprite;
@@ -42,6 +43,9 @@ public class IconContainer : MonoBehaviour {
 
 	[SerializeField]
 	private Color purpleColor = Color.magenta;
+
+	[SerializeField]
+	GameObject iconPrefab;
 
 	public Sprite SquiggleEdgeSprite {
 		get {
@@ -129,6 +133,6 @@ public class IconContainer : MonoBehaviour {
 	}
 
 	public IconObject GetRandomIcon() {
-		return icons[Random.Range(0, icons.Length - 1)];
+		return iconObjects[Random.Range(0, iconObjects.Length - 1)];
 	}
 }
