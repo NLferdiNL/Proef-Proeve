@@ -125,6 +125,16 @@ public class IconAssetData : MonoBehaviour {
 		}
 	}
 
+	public GameObject IconPrefab {
+		get {
+			return iconPrefab;
+		}
+
+		set {
+			iconPrefab = value;
+		}
+	}
+
 	private void Awake() {
 		if(instance != null && instance != this)
 			Debug.LogError("More than one IconContainer component was found.");
