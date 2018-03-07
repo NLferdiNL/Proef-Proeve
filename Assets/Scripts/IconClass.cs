@@ -103,6 +103,18 @@ public class IconClass : MonoBehaviour {
 		}
 
 		visibleEdge.color = inner.color = newColor;
+
+		switch(amount) {
+			case Amount.one:
+
+				break;
+			case Amount.two:
+
+				break;
+			case Amount.three:
+
+				break;
+		}
 	}
 
 	public static bool operator ==(IconClass a, IconClass b) {
