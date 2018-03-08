@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class IconClass : MonoBehaviour {
 
 	public enum Amount {
@@ -10,6 +9,7 @@ public class IconClass : MonoBehaviour {
 		three = 3
 	}
 
+	[SerializeField, HideInInspector]
 	private IconObject icon;
 
 	[SerializeField]
@@ -23,14 +23,18 @@ public class IconClass : MonoBehaviour {
 			if(icon != null)
 				return icon.shading;
 
+			print("Icon not found");
+
 			return IconObject.Shading.open;
 		}
 	}
 
 	public IconObject.Shape shape {
 		get {
-			if(icon != null)
+			if(icon != null) 
 				return icon.shape;
+
+			print("Icon not found");
 
 			return IconObject.Shape.diamond;
 		}
@@ -40,6 +44,8 @@ public class IconClass : MonoBehaviour {
 		get {
 			if(icon != null)
 				return icon.color;
+
+			print("Icon not found");
 
 			return IconObject.Color.green;
 		}
@@ -54,6 +60,10 @@ public class IconClass : MonoBehaviour {
 			icon = value;
 			UpdateSprites();
 		}
+	}
+
+	private void Start() {
+		UpdateSprites();
 	}
 
 	public void UpdateSprites() {
