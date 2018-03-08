@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Circle : MonoBehaviour {
 
+	[SerializeField]
 	private IconClass[] icons;
 
 	private int rotationAngle = 45;
@@ -14,6 +15,8 @@ public class Circle : MonoBehaviour {
 	private float currentAngle = 0;
 
 	private Image image;
+
+	private int currentOffset = 0;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 	private RectTransform transform;
@@ -54,6 +57,18 @@ public class Circle : MonoBehaviour {
 		image = GetComponent<Image>();
 		transform = GetComponent<RectTransform>();
 		rotationAngle = 360 / iconsInCircle;
+		GenerateIcons();
+	}
+
+	public IconClass GetIcon(int index) {
+		index += currentOffset;
+
+		if(index < 0)
+			index = icons.Length;
+		else if(index >= icons.Length)
+			index = 0;
+
+		return icons[index];
 	}
 
 	public void GenerateIcons() {
@@ -61,7 +76,12 @@ public class Circle : MonoBehaviour {
 		
 		for(int i = 0; i < iconsInCircle; i++) {
 			GameObject iconContainer = Instantiate(IconAssetData.Instance.IconPrefab, Vector3.zero, Quaternion.identity, transform);
+			iconContainer.name = "Icon " + i;
+			IconClass iconClass = iconContainer.GetComponent<IconClass>();
+			iconClass.Icon = IconAssetData.Instance.GetRandomIcon();
 
+			icons[i] = iconClass;
+			
 		}
 	}
 
@@ -81,6 +101,16 @@ public class Circle : MonoBehaviour {
 			Quaternion startAngle = transform.rotation;
 
 			float position = 0;
+
+			if(addedAngle < 0)
+				currentOffset--;
+			else
+				currentOffset++;
+
+			if(currentOffset < 0)
+				currentOffset = icons.Length;
+			else if(currentOffset >= icons.Length)
+				currentOffset = 0;
 
 			while(position < 1) {
 				position += Time.deltaTime * rotationSpeed;
