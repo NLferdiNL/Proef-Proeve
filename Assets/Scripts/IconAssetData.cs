@@ -1,17 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IconAssetData : MonoBehaviour {
 
 	public class IconData {
 
+		public enum Shading {
+			Open = 0,
+			Striped = 1,
+			Solid = 2
+		} 
+
 		private int amount = 1;
 		private Sprite sprite;
 		private Color color;
+		private Shading shading;
 
-		public IconData(int amount, Sprite sprite, Color color) {
+		public IconData(int amount, Sprite sprite, Shading shading, Color color) {
 			this.amount = amount;
 			this.sprite = sprite;
+			this.shading = shading;
 			this.color = color;
 		}
 
@@ -33,30 +42,39 @@ public class IconAssetData : MonoBehaviour {
 			}
 		}
 
+		public Shading _Shading {
+			get {
+				return shading;
+			}
+		}
+
 		public static bool operator==(IconData a, IconData b) {
 			if(Equals(a, null) || Equals(b, null))
 				return false;
 
-			return a.Color == b.Color || a.Sprite == b.Sprite || a.Amount == b.Amount;
+			return a.Color == b.Color || a.Sprite == b.Sprite || a.Amount == b.Amount || a._Shading == b._Shading;
 		}
 
 		public static bool operator!=(IconData a, IconData b) {
 			if(Equals(a, null) || Equals(b, null))
 				return false;
 
-			return a.Color != b.Color && a.Sprite != b.Sprite && a.Amount != b.Amount;
+			return a.Color != b.Color && a.Sprite != b.Sprite && a.Amount != b.Amount && a._Shading != b._Shading;
 		}
 
 		public static bool Set(IconData a, IconData b, IconData c) {
-			if(a.color == b.color && b.color == c.color)
+			if(a.Color == b.Color && b.Color == c.Color)
 				return true;
 
-			if(a.sprite == b.sprite && b.sprite == c.sprite)
+			if(a.Sprite == b.Sprite && b.Sprite == c.Sprite)
 				return true;
 			
-			if(a.amount == b.amount && b.amount == c.amount)
+			if(a.Amount == b.Amount && b.Amount == c.Amount)
 				return true;
-			
+
+			if(a._Shading == b._Shading && b._Shading == c._Shading)
+				return true;
+
 			if(a != b && a != c && b != c)
 				return true;
 
@@ -68,7 +86,8 @@ public class IconAssetData : MonoBehaviour {
 			return data != null &&
 				   EqualityComparer<Color>.Default.Equals(Color, data.Color) &&
 				   EqualityComparer<Sprite>.Default.Equals(Sprite, data.Sprite) &&
-				   Amount == data.Amount;
+				   Amount == data.Amount &&
+				   shading == data._Shading;
 		}
 
 		public override int GetHashCode() {
@@ -76,12 +95,13 @@ public class IconAssetData : MonoBehaviour {
 			hashCode = hashCode * -1521134295 + EqualityComparer<Color>.Default.GetHashCode(Color);
 			hashCode = hashCode * -1521134295 + EqualityComparer<Sprite>.Default.GetHashCode(Sprite);
 			hashCode = hashCode * -1521134295 + Amount.GetHashCode();
+			hashCode = hashCode * -1521134295 + Amount.GetHashCode();
 			return hashCode;
 		}
 	}
 
 	[SerializeField]
-	List<IconData> iconObjects;
+	List<IconData> iconObjects = new List<IconData>();
 
 	static IconAssetData instance;
 
@@ -93,16 +113,7 @@ public class IconAssetData : MonoBehaviour {
 			return instance;
 		}
 	}
-
-	/*[SerializeField]
-	private Sprite squiggleEdgeSprite;
-
-	[SerializeField]
-	private Sprite ovalEdgeSprite;
-
-	[SerializeField]
-	private Sprite diamondEdgeSprite;*/
-
+	
 	[SerializeField]
 	private Sprite openShadingSprite;
 
@@ -111,16 +122,7 @@ public class IconAssetData : MonoBehaviour {
 
 	[SerializeField]
 	private Sprite solidShadingSprite;
-
-	//[SerializeField]
-	//private Color redColor = Color.red;
-
-	//[SerializeField]
-	//private Color greenColor = Color.green;
-
-	//[SerializeField]
-	//private Color purpleColor = Color.magenta;
-
+	
 	[SerializeField]
 	GameObject iconPrefab;
 
@@ -136,24 +138,6 @@ public class IconAssetData : MonoBehaviour {
 
 	[SerializeField]
 	Sprite[] symbolSprites;
-
-	/*public Sprite SquiggleEdgeSprite {
-		get {
-			return squiggleEdgeSprite;
-		}
-	}
-
-	public Sprite OvalEdgeSprite {
-		get {
-			return ovalEdgeSprite;
-		}
-	}
-
-	public Sprite DiamondEdgeSprite {
-		get {
-			return diamondEdgeSprite;
-		}
-	}*/
 
 	public Sprite OpenShadingSprite {
 		get {
@@ -172,24 +156,6 @@ public class IconAssetData : MonoBehaviour {
 			return solidShadingSprite;
 		}
 	}
-
-	/*public Color RedColor {
-		get {
-			return redColor;
-		}
-	}
-
-	public Color GreenColor {
-		get {
-			return greenColor;
-		}
-	}
-
-	public Color PurpleColor {
-		get {
-			return purpleColor;
-		}
-	}*/
 
 	public GameObject IconPrefab {
 		get {
@@ -211,17 +177,32 @@ public class IconAssetData : MonoBehaviour {
 	}
 
 	IconData GenerateIconData() {
-		IconData iconData = new IconData(Random.Range(1,4), symbolSprites[Random.Range(0, symbolSprites.Length)], symbolColors[Random.Range(0, symbolColors.Length)]);
+		IconData.Shading shading = IconData.Shading.Open;
 
-		if(Array.IndexOf(iconObjects, iconData) == -1)
+		switch(UnityEngine.Random.Range(0, 4)) {
+			case 0:
+				shading = IconData.Shading.Open;
+				break;
+			case 1:
+				shading = IconData.Shading.Striped;
+				break;
+			case 2:
+				shading = IconData.Shading.Solid;
+				break;
+		}
+
+		IconData iconData = new IconData(UnityEngine.Random.Range(1,4), symbolSprites[UnityEngine.Random.Range(0, symbolSprites.Length)], shading, symbolColors[UnityEngine.Random.Range(0, symbolColors.Length)]);
+
+		if(iconObjects.IndexOf(iconData) == -1) {
+			iconObjects.Add(iconData);
 			return iconData;
-		else
+		} else {
 			return GenerateIconData();
+		}
 	}
 
 	public IconData GetRandomIcon() {
 		IconData toReturn = GenerateIconData();
-		iconObjects.Add(toReturn);
 		return toReturn;
 	}
 }

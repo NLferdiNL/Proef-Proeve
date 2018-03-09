@@ -132,6 +132,7 @@ public class Circle : MonoBehaviour {
 			transform.rotation = goalAngle;
 			currentAngle = goalAngle.z;
 			rotating = false;
+			ScoreCheck.BoardChanged();
 		}
 	}
 }
