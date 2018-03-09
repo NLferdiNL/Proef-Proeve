@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 86e3625bc7c67ce4da0a8b5783f312dc
+  - enabled: 1
+    path: Assets/Scenes/ferdi_testscene.unity
+    guid: c7ae0d6acb1d5df4dacb9dc06ebaa3ff
+  - enabled: 1
+    path: Assets/Scenes/Swan_TestScene.unity
+    guid: bdc64da4cc5c5df458e38d2ad584c033

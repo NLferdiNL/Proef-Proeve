@@ -1,45 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-
-    public string mainMenu;
-    public string levelSelect;
-
-    public bool isPaused;
-
     public GameObject pauseMenuCanvas;
 
-
-    void Update()
+    public void Start()
     {
-        if (isPaused)
+        if (!pauseMenuCanvas)
         {
-            pauseMenuCanvas.SetActive(true);
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            pauseMenuCanvas.SetActive(false);
-            Time.timeScale = 1f;
-        }
-        if (Input.GetButtonDown("Cancel"))
-        {
-            isPaused = !isPaused;
+            Debug.Log("PauseMenuCanvas: " + pauseMenuCanvas);
         }
     }
 
-    public void Resume()
+    public void Pause()
     {
-        isPaused = false;
+        pauseMenuCanvas.SetActive(true);
+        Time.timeScale = 0f;
     }
-    public void LevelSelect()
+
+    public void UnPause()
     {
-        Application.LoadLevel(levelSelect);
+        pauseMenuCanvas.SetActive(false);
+        Time.timeScale = 1f;
     }
+
     public void Quit()
     {
-        Application.LoadLevel(mainMenu);
+        SceneManager.LoadScene("MainMenu");
     }
 }
