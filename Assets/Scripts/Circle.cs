@@ -6,29 +6,38 @@ public class Circle : MonoBehaviour {
 
 	[SerializeField]
 	private IconClass[] icons;
+	// The icons this circle holds.
 
 	private int rotationAngle = 45;
+	// The angle the icons need to rotate.
+	// 360 / iconsInCircle = rotationAngle
 	
 	private int iconsInCircle {
 		get {
 			return IconAssetData.Instance.IconsInCircle;
 		}
 	}
+	//Shortcut to the integer.
 
 	private float currentAngle = 0;
+	// Current Z rotation
 
 	private Image image;
+	// To change color.
 
 	private int currentOffset = 0;
+	// Icon array offset caused by rotation.
 
 	[SerializeField]
 	RectTransform itemPivot;
+	// The starting points for generating icons.
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 	private RectTransform transform;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
 	private bool rotating = false;
+	// Is this circle rotating.
 
 	[SerializeField]
 	private float rotationSpeed = 1;
@@ -66,6 +75,7 @@ public class Circle : MonoBehaviour {
 		GenerateIcons();
 	}
 
+	// Returns Icon keeping offset in mind.
 	public IconClass GetIcon(int index) {
 		index += currentOffset;
 
@@ -77,12 +87,14 @@ public class Circle : MonoBehaviour {
 		return icons[index];
 	}
 
+	// Setup icons on this circle
 	public void GenerateIcons() {
 		icons = new IconClass[iconsInCircle];
 		
 		for(int i = 0; i < iconsInCircle; i++) {
 			GameObject iconContainer = Instantiate(IconAssetData.Instance.IconPrefab, Vector3.zero, Quaternion.identity, transform);
 			iconContainer.name = "Icon " + i;
+
 			IconClass iconClass = iconContainer.GetComponent<IconClass>();
 			iconClass.Icon = IconAssetData.Instance.GetRandomIcon();
 
@@ -104,6 +116,7 @@ public class Circle : MonoBehaviour {
 		StartCoroutine(Move(rotationAngle));
 	}
 
+	// Makes the animation happen.
 	IEnumerator Move(float addedAngle) {
 		if(!rotating) {
 			rotating = true;
@@ -132,7 +145,9 @@ public class Circle : MonoBehaviour {
 			transform.rotation = goalAngle;
 			currentAngle = goalAngle.z;
 			rotating = false;
-			//ScoreCheck.BoardChanged();
+
+			if(ScoreCheck.OnBoardChange != null)
+				ScoreCheck.OnBoardChange();
 		}
 	}
 }
