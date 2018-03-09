@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0600ede677a636a42a23fff2353e5ccc, type: 3}
-  m_Name: RedDiamondSolid
+  m_Name: RedDiamondOpen
   m_EditorClassIdentifier: 
   shading: 0
   shape: 0

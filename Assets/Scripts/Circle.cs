@@ -8,15 +8,21 @@ public class Circle : MonoBehaviour {
 	private IconClass[] icons;
 
 	private int rotationAngle = 45;
-
-	[SerializeField]
-	private int iconsInCircle = 8;
+	
+	private int iconsInCircle {
+		get {
+			return IconAssetData.Instance.IconsInCircle;
+		}
+	}
 
 	private float currentAngle = 0;
 
 	private Image image;
 
 	private int currentOffset = 0;
+
+	[SerializeField]
+	RectTransform itemPivot;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 	private RectTransform transform;
@@ -79,6 +85,11 @@ public class Circle : MonoBehaviour {
 			iconContainer.name = "Icon " + i;
 			IconClass iconClass = iconContainer.GetComponent<IconClass>();
 			iconClass.Icon = IconAssetData.Instance.GetRandomIcon();
+
+			RectTransform iconRect = iconContainer.GetComponent<RectTransform>();
+			iconRect.position = itemPivot.position;
+			iconRect.sizeDelta = itemPivot.sizeDelta;// + new Vector2(itemPivot.sizeDelta.x, 0);
+			iconRect.RotateAround(transform.position, Vector3.forward, rotationAngle*i);
 
 			icons[i] = iconClass;
 			

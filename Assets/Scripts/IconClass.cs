@@ -1,7 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class IconClass : MonoBehaviour {
+
+	public enum Shading {
+		solid = 0,
+		striped = 1,
+		open = 2
+	}
+
+	public enum Shape {
+		diamond = 0,
+		squiggle = 1,
+		oval = 2
+	}
+
+	public enum Color {
+		red = 0,
+		green = 1,
+		purple = 2
+	}
 
 	public enum Amount {
 		one = 1,
@@ -13,43 +32,19 @@ public class IconClass : MonoBehaviour {
 	private IconObject icon;
 
 	[SerializeField]
-	Amount amount;
+	private Amount amount;
 
 	[SerializeField]
-	Image edgeMask, inner, visibleEdge;
+	private Image edgeMask, inner, visibleEdge;
 
-	public IconObject.Shading shading {
-		get {
-			if(icon != null)
-				return icon.shading;
+	[SerializeField]
+	private Shading shading;
 
-			print("Icon not found");
+	[SerializeField]
+	private Shape shape;
 
-			return IconObject.Shading.open;
-		}
-	}
-
-	public IconObject.Shape shape {
-		get {
-			if(icon != null) 
-				return icon.shape;
-
-			print("Icon not found");
-
-			return IconObject.Shape.diamond;
-		}
-	}
-
-	public IconObject.Color color {
-		get {
-			if(icon != null)
-				return icon.color;
-
-			print("Icon not found");
-
-			return IconObject.Color.green;
-		}
-	}
+	[SerializeField]
+	private Color color;
 
 	public IconObject Icon {
 		get {
@@ -58,7 +53,42 @@ public class IconClass : MonoBehaviour {
 
 		set {
 			icon = value;
+			UpdateValues();
 			UpdateSprites();
+		}
+	}
+
+	private void UpdateValues() {
+		throw new NotImplementedException();
+	}
+
+	public Shading Shading1 {
+		get {
+			return shading;
+		}
+
+		set {
+			shading = value;
+		}
+	}
+
+	public Shape Shape1 {
+		get {
+			return shape;
+		}
+
+		set {
+			shape = value;
+		}
+	}
+
+	public Color Color1 {
+		get {
+			return color;
+		}
+
+		set {
+			color = value;
 		}
 	}
 

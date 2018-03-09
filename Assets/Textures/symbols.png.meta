@@ -1,10 +1,12 @@
 fileFormatVersion: 2
-guid: 715ec090d63f01e438540a02f727171f
-timeCreated: 1520412352
+guid: 41e9bcb6040c0bd488d6d76ba3aea4f5
+timeCreated: 1520585272
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: oval_0
+    21300000: symbols_0
+    21300002: symbols_1
+    21300004: symbols_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -111,13 +113,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: oval_0
+      name: symbols_0
       rect:
         serializedVersion: 2
-        x: 61
-        y: 27
-        width: 140
-        height: 81
+        x: 232
+        y: 434
+        width: 310
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: symbols_1
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 434
+        width: 358
+        height: 309
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: symbols_2
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 434
+        width: 401
+        height: 308
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
