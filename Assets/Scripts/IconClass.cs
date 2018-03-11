@@ -20,15 +20,15 @@ public class IconClass : MonoBehaviour {
 
 		set {
 			icon = value;
-			UpdateSprites();
+			UpdateValues();
 		}
 	}
 
 	private void Start() {
-		UpdateSprites();
+		UpdateValues();
 	}
 
-	public void UpdateSprites() {
+	public void UpdateValues() {
 		Sprite newSprite = icon.Sprite;
 
 		edgeMask.sprite = visibleEdge.sprite = newSprite;
