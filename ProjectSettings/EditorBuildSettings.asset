@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Swan_TestScene.unity
     guid: bdc64da4cc5c5df458e38d2ad584c033
+  - enabled: 1
+    path: Assets/Scenes/OptionsMenu.unity
+    guid: 33566e4e44c90224d8e0893dff11b328

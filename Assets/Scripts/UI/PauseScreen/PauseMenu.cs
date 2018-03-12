@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuCanvas;
+
+   
 
     public void Start()
     {
@@ -16,6 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        
         pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -26,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Quit()
+    public void QuitToMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
