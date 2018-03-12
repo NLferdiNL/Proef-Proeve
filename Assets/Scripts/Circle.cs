@@ -25,6 +25,7 @@ public class Circle : MonoBehaviour {
 	private Image image;
 	// To change color.
 
+	[SerializeField]
 	private int currentOffset = 0;
 	// Icon array offset caused by rotation.
 
@@ -127,12 +128,12 @@ public class Circle : MonoBehaviour {
 			float position = 0;
 
 			if(addedAngle < 0)
-				currentOffset--;
-			else
 				currentOffset++;
+			else
+				currentOffset--;
 
 			if(currentOffset < 0)
-				currentOffset = icons.Length;
+				currentOffset = icons.Length - 1;
 			else if(currentOffset >= icons.Length)
 				currentOffset = 0;
 
