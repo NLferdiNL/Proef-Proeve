@@ -65,36 +65,30 @@ public class IconAssetData : MonoBehaviour {
 		public static bool Set(IconData a, IconData b, IconData c) {
 			bool currentStatus = false;
 
-			if(a.Color == b.Color && b.Color == c.Color)
-				currentStatus = true;
-			else if(a.Color != b.Color && a.Color != c.Color && b.Color != c.Color)
-				currentStatus = true;
-			else
-				return false;
-
-			if(a.Sprite == b.Sprite && b.Sprite == c.Sprite)
-				currentStatus = true;
-			else if(a.Sprite != b.Sprite && b.Sprite != c.Sprite && a.Sprite != c.Sprite)
+			if((a.Color == b.Color && b.Color == c.Color) || 
+			   (a.Color != b.Color && a.Color != c.Color && b.Color != c.Color))
 				currentStatus = true;
 			else
 				return false;
 
-			if(a.Amount == b.Amount && b.Amount == c.Amount)
-				currentStatus = true;
-			else if(a.Amount != b.Amount && b.Amount != c.Amount && a.Amount != c.Amount)
-				currentStatus = true;
-			else
-				return false;
-
-			if(a._Shading == b._Shading && b._Shading == c._Shading)
-				currentStatus = true;
-			else if(a._Shading != b._Shading && b._Shading != c._Shading && a._Shading != c._Shading)
+			if((a.Amount == b.Amount && b.Amount == c.Amount) ||
+			   (a.Amount != b.Amount && a.Amount != c.Amount && b.Amount != c.Amount))
 				currentStatus = true;
 			else
 				return false;
 
-			if(a != b && a != c && b != c)
+			if((a._Shading == b._Shading && b._Shading == c._Shading) ||
+			   (a._Shading != b._Shading && a._Shading != c._Shading && b._Shading != c._Shading))
 				currentStatus = true;
+			else
+				return false;
+
+			if((a.Sprite == b.Sprite && b.Sprite == c.Sprite) ||
+			   (a.Sprite != b.Sprite && a.Sprite != c.Sprite && b.Sprite != c.Sprite))
+				currentStatus = true;
+			else
+				return false;
+
 
 			return currentStatus;
 		}

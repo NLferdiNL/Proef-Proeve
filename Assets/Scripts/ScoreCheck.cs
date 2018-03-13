@@ -21,7 +21,8 @@ public class ScoreCheck : MonoBehaviour {
 			IconClass c = circles[2].GetIcon(i);
 
 			if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
-				print("set at" + i);
+				print(a.name + " at outer, " + b.name + " in the middle & " + c.name + " at inner");
+				print("set at " + i);
 			}
 		}
 	}
