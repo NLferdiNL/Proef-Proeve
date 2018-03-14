@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 9b97b54fff6fce34a92967b31d17cea4
-timeCreated: 1521026092
+guid: 1adb7eba9a21bba49b8f79bfc4d2db47
+timeCreated: 1521061700
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: panel1_0
+    21300000: HomeAndResume_0
+    21300002: HomeAndResume_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -111,13 +112,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: panel1_0
+      name: HomeAndResume_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 17
-        width: 1114
-        height: 1090
+        x: 0
+        y: 347
+        width: 543
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HomeAndResume_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 543
+        height: 154
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
