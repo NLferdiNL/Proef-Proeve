@@ -80,12 +80,7 @@ public class Circle : MonoBehaviour {
 	public IconClass GetIcon(int index) {
 		index += currentOffset;
 
-		if(index < 0)
-			index = iconsInCircle + index;
-		else if(index >= iconsInCircle)
-			index = index - (iconsInCircle * (index % iconsInCircle));
-
-		print(index);
+		index = index - iconsInCircle * (index / iconsInCircle);
 
 		return icons[index];
 	}
