@@ -149,6 +149,9 @@ public class IconAssetData : MonoBehaviour {
 	};
 
 	[SerializeField]
+	private Color inActiveColor = Color.gray;
+
+	[SerializeField]
 	Sprite[] symbolSprites;
 
 	public Sprite OpenShadingSprite {
@@ -178,6 +181,12 @@ public class IconAssetData : MonoBehaviour {
 	public int IconsInCircle {
 		get {
 			return iconsInCircle;
+		}
+	}
+
+	public Color InActiveColor {
+		get {
+			return inActiveColor;
 		}
 	}
 

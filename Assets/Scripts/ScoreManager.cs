@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreCheck : MonoBehaviour {
+public class ScoreManager : MonoBehaviour {
 
 	public static Action OnBoardChange { get; private set; }
 
 	[SerializeField]
 	Circle[] circles;
 
+	public static int Score { get; private set; }
+
 	private void Start() {
 		OnBoardChange = BoardChanged;
+		Score = 0;
 	}
 																	  
 	public void BoardChanged() {
@@ -20,9 +23,11 @@ public class ScoreCheck : MonoBehaviour {
 			IconClass b = circles[1].GetIcon(i);
 			IconClass c = circles[2].GetIcon(i);
 
-			if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
-				print(a.name + " at outer, " + b.name + " in the middle & " + c.name + " at inner");
-				print("set at " + i);
+			if(a.Active && b.Active && c.Active) {
+				if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
+					Score++;
+					a.Active = b.Active = c.Active = false;
+				}
 			}
 		}
 	}

@@ -12,7 +12,20 @@ public class IconClass : MonoBehaviour {
 
 	[SerializeField]
 	private Image edgeMask, inner, visibleEdge;
-	
+
+	private bool active = true;
+
+	public bool Active {
+		get {
+			return active;
+		}
+
+		set {
+			active = value;
+			visibleEdge.color = inner.color = active ? icon.Color : IconAssetData.Instance.InActiveColor;
+		}
+	}
+
 	public IconAssetData.IconData Icon {
 		get {
 			return icon;
