@@ -11,7 +11,7 @@ public class Circle : MonoBehaviour {
 	private int rotationAngle = 45;
 	// The angle the icons need to rotate.
 	// 360 / iconsInCircle = rotationAngle
-	
+
 	private int iconsInCircle {
 		get {
 			return IconAssetData.Instance.IconsInCircle;
@@ -40,8 +40,11 @@ public class Circle : MonoBehaviour {
 	private bool rotating = false;
 	// Is this circle rotating.
 
-	[SerializeField]
-	private float rotationSpeed = 1;
+	private float rotationSpeed {
+		get {
+			return DebugMovement.instance.RotationSpeed;
+		}
+	}
 	
 	public Color Color {
 		get {
@@ -144,8 +147,7 @@ public class Circle : MonoBehaviour {
 			currentAngle = goalAngle.z;
 			rotating = false;
 
-			if(ScoreManager.OnBoardChange != null)
-				ScoreManager.OnBoardChange();
+			
 		}
 	}
 }
