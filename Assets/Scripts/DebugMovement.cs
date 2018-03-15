@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugMovement : MonoBehaviour {
 
@@ -27,6 +28,11 @@ public class DebugMovement : MonoBehaviour {
 		right = Input.GetKey(KeyCode.D);
 		up = Input.GetKeyDown(KeyCode.W);
 		down = Input.GetKeyDown(KeyCode.S);
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
 		if(!selectedCircle.Rotating) {
 			if(left && right)
