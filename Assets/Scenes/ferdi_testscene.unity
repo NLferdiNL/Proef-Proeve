@@ -384,7 +384,6 @@ MonoBehaviour:
   icons: []
   currentOffset: 0
   itemPivot: {fileID: 56960817}
-  rotationSpeed: 1
 --- !u!114 &368801383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +664,7 @@ MonoBehaviour:
   - {fileID: 1668748017}
   - {fileID: 368801382}
   - {fileID: 1322644379}
+  rotationSpeed: 5
   selectedColor: {r: 0.53676474, g: 0.7590801, b: 1, a: 1}
   regularColor: {r: 0.27058825, g: 0.27058825, b: 0.27058825, a: 0}
 --- !u!1 &1322644377
@@ -718,7 +718,6 @@ MonoBehaviour:
   icons: []
   currentOffset: 0
   itemPivot: {fileID: 1960910350}
-  rotationSpeed: 1
 --- !u!114 &1322644380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,7 +904,6 @@ MonoBehaviour:
   icons: []
   currentOffset: 0
   itemPivot: {fileID: 369567634}
-  rotationSpeed: 1
 --- !u!1 &1853452318
 GameObject:
   m_ObjectHideFlags: 0
