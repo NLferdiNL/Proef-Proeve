@@ -5,8 +5,15 @@ public class DebugMovement : MonoBehaviour {
 
 	private int selectedCircleIndex = 0;
 
+	public static DebugMovement instance;
+
 	[SerializeField]
 	private Circle[] circles = new Circle[3];
+
+	[SerializeField]
+	private float rotationSpeed = 5;
+
+	public static bool buttonHeld = false;
 
 	private Circle selectedCircle {
 		get {
@@ -14,10 +21,17 @@ public class DebugMovement : MonoBehaviour {
 		}
 	}
 
+	public float RotationSpeed {
+		get {
+			return rotationSpeed;
+		}
+	}
+
 	[SerializeField]
 	private Color selectedColor, regularColor;
 
 	private void Start() {
+		instance = this;
 		selectedCircle.Color = selectedColor;
 	}
 
@@ -40,6 +54,14 @@ public class DebugMovement : MonoBehaviour {
 
 			if(up && down)
 				up = down = false;
+
+			bool buttonHeldLastFrame = buttonHeld;
+
+			buttonHeld = up || down || left || right;
+
+			if(!buttonHeld && buttonHeldLastFrame)
+				if(ScoreManager.OnBoardChange != null)
+					ScoreManager.OnBoardChange();
 
 			if(left)
 				MoveRight();
