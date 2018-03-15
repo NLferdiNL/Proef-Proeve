@@ -80,10 +80,7 @@ public class Circle : MonoBehaviour {
 	public IconClass GetIcon(int index) {
 		index += currentOffset;
 
-		if(index < 0)
-			index = icons.Length;
-		else if(index >= icons.Length)
-			index = 0;
+		index = index - iconsInCircle * (index / iconsInCircle);
 
 		return icons[index];
 	}
@@ -147,8 +144,8 @@ public class Circle : MonoBehaviour {
 			currentAngle = goalAngle.z;
 			rotating = false;
 
-			if(ScoreCheck.OnBoardChange != null)
-				ScoreCheck.OnBoardChange();
+			if(ScoreManager.OnBoardChange != null)
+				ScoreManager.OnBoardChange();
 		}
 	}
 }
