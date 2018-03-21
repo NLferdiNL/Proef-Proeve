@@ -13,15 +13,6 @@ public class SoundAndMusic : MonoBehaviour
     {
         Music = Resources.LoadAll<AudioClip>("Audio/Music");
         SoundEffects = Resources.LoadAll<AudioClip>("Audio/SoundEffects");
-
-
-
-        /*
-        foreach (AudioClip clip in AudioLibrary)
-        {
-            
-        }*/
-
     }
 
 
