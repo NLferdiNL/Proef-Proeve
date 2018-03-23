@@ -2,6 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*#if UNITY_EDITOR
+using UnityEditor;
+
+[CustomEditor(typeof(IconAssetData))]
+public class IconAssetDataEditor : Editor {
+
+	bool showIconList = false;
+
+	public override void OnInspectorGUI() {
+		IconAssetData instance = target as IconAssetData;
+		base.OnInspectorGUI();
+
+		showIconList = EditorGUILayout.Toggle("Show Icons" ,showIconList);
+
+		GUILayout.Label("Icons: " + instance.iconObjects.Count);
+
+		if(showIconList) {
+			//GUILayout.BeginHorizontal();
+			for(int i = 0; instance.iconObjects.Count > i; i++) {
+				IconAssetData.IconData curr = instance.iconObjects[i];
+
+				GUILayout.Label(curr.Sprite.name + ": " + curr.Color.ToString() + ", " + curr._Shading);
+			}
+			//GUILayout.EndHorizontal();
+		}
+	}
+}
+#endif*/
+
 public class IconAssetData : MonoBehaviour {
 
 	public class IconData {
@@ -14,14 +43,18 @@ public class IconAssetData : MonoBehaviour {
 
 		private int amount = 1;
 		private Sprite sprite;
+		private Sprite spriteMask;
 		private Color color;
 		private Shading shading;
+		private int index;
 
-		public IconData(int amount, Sprite sprite, Shading shading, Color color) {
+		public IconData(int amount, Sprite sprite, Sprite spriteMask, Shading shading, Color color, int index = -1) {
 			this.amount = amount;
 			this.sprite = sprite;
+			this.spriteMask = spriteMask;
 			this.shading = shading;
 			this.color = color;
+			this.index = index;
 		}
 
 		public Color Color {
@@ -45,6 +78,22 @@ public class IconAssetData : MonoBehaviour {
 		public Shading _Shading {
 			get {
 				return shading;
+			}
+		}
+
+		public int Index {
+			get {
+				return index;
+			}
+
+			set {
+				index = value;
+			}
+		}
+
+		public Sprite SpriteMask {
+			get {
+				return spriteMask;
 			}
 		}
 
@@ -113,7 +162,7 @@ public class IconAssetData : MonoBehaviour {
 	}
 
 	[SerializeField]
-	List<IconData> iconObjects = new List<IconData>();
+	public List<IconData> iconObjects = new List<IconData>();
 
 	static IconAssetData instance;
 
@@ -153,6 +202,9 @@ public class IconAssetData : MonoBehaviour {
 
 	[SerializeField]
 	Sprite[] symbolSprites;
+
+	[SerializeField]
+	Sprite[] symbolMaskSprites;
 
 	public Sprite OpenShadingSprite {
 		get {
@@ -200,7 +252,7 @@ public class IconAssetData : MonoBehaviour {
 	IconData GenerateIconData() {
 		IconData.Shading shading = IconData.Shading.Open;
 
-		switch(UnityEngine.Random.Range(0, 4)) {
+		switch(UnityEngine.Random.Range(0, 4)) {	
 			case 0:
 				shading = IconData.Shading.Open;
 				break;
@@ -212,10 +264,13 @@ public class IconAssetData : MonoBehaviour {
 				break;
 		}
 
-		IconData iconData = new IconData(0, symbolSprites[UnityEngine.Random.Range(0, symbolSprites.Length)], shading, symbolColors[UnityEngine.Random.Range(0, symbolColors.Length)]);
+		int spriteInt = UnityEngine.Random.Range(0, symbolSprites.Length);
+
+		IconData iconData = new IconData(0, symbolSprites[spriteInt], symbolMaskSprites[spriteInt], shading, symbolColors[UnityEngine.Random.Range(0, symbolColors.Length)]);
 
 		if(!IconExists(iconData)) {
 			iconObjects.Add(iconData);
+			iconData.Index = iconObjects.Count - 1;
 			return iconData;
 		} else {
 			return GenerateIconData();
@@ -236,5 +291,9 @@ public class IconAssetData : MonoBehaviour {
 	public IconData GetRandomIcon() {
 		IconData toReturn = GenerateIconData();
 		return toReturn;
+	}
+
+	public void RemoveIcon(IconData icon) {
+		iconObjects.RemoveAt(icon.Index);
 	}
 }
