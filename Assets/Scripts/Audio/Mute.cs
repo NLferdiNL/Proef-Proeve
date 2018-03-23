@@ -10,13 +10,13 @@ public class Mute : MonoBehaviour {
     {
         if (!Muted)
         {
-            
+            AudioListener.volume = 0;
             Muted = true;
             return;
         }
         else if (Muted)
         {
-
+            AudioListener.volume = 100;
             Muted = false;
             return;
         }

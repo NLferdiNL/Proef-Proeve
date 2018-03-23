@@ -25,7 +25,7 @@ public class SoundAndMusic : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         else if (instance != this)
         {
             Destroy(gameObject);
@@ -41,7 +41,7 @@ public class SoundAndMusic : MonoBehaviour
     {
         PlayMusic(0);
         PlaySfx(0);
-    }
+    }//Test
 
     public void PlayMusic(int pickMus)
     {
@@ -49,7 +49,7 @@ public class SoundAndMusic : MonoBehaviour
         BackgroundMusic.Play();
     }
 
-    private void PlaySfx(int pickSfx)
+    public void PlaySfx(int pickSfx)
     {
         SoundEffectOne.clip = SoundEffects[pickSfx];
         SoundEffectOne.Play();
