@@ -27,6 +27,13 @@ public class ScoreManager : MonoBehaviour {
 				if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
 					Score++;
 					a.Active = b.Active = c.Active = false;
+					IconAssetData.Instance.RemoveIcon(a.Icon);
+					IconAssetData.Instance.RemoveIcon(b.Icon);
+					IconAssetData.Instance.RemoveIcon(c.Icon);
+
+					a.Icon = IconAssetData.Instance.GetRandomIcon();
+					b.Icon = IconAssetData.Instance.GetRandomIcon();
+					c.Icon = IconAssetData.Instance.GetRandomIcon();
 				}
 			}
 		}

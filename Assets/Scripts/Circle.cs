@@ -81,11 +81,23 @@ public class Circle : MonoBehaviour {
 
 	// Returns Icon keeping offset in mind.
 	public IconClass GetIcon(int index) {
-		index += currentOffset;
-
-		index = index - iconsInCircle * (index / iconsInCircle);
+		index = IndexWithOffset(index);
 
 		return icons[index];
+	}
+
+	private int IndexWithOffset(int index) {
+		index += currentOffset;
+
+		return index - iconsInCircle * (index / iconsInCircle);
+	}
+
+	// To replace a used up icon.
+	public void ReplaceIcon(int index) {
+		index = IndexWithOffset(index);
+
+		IconClass iconClass = icons[index];
+		iconClass.Icon = IconAssetData.Instance.GetRandomIcon();
 	}
 
 	// Setup icons on this circle
