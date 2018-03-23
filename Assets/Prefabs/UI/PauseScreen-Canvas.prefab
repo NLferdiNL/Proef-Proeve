@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 114620804017793920}
   - component: {fileID: 114144486913419976}
   - component: {fileID: 114253562315533638}
-  - component: {fileID: 328409677597241798}
   m_Layer: 5
   m_Name: PauseScreen-Canvas
   m_TagString: Untagged
@@ -1026,34 +1025,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000030518, y: -32.694214}
   m_SizeDelta: {x: 400, y: 113}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!328 &328409677597241798
-VideoPlayer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1390310252329218}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 0be0be743f025db419f9f83d184a11f3, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: _MainTex
-  m_RenderMode: 2
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 1
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
-  m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
