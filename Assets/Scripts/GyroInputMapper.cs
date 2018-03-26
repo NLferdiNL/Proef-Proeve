@@ -13,16 +13,16 @@ public class GyroInputMapper : MonoBehaviour
     {
         instance = this;
 
-        if (Input.gyro.enabled)
+        if (SystemInfo.supportsGyroscope)
         {
             _gyroState = true;
             Debug.Log("yay it works");
+            Input.gyro.enabled = true;
         }
         else
         {
             Debug.Log("This device may not have a Gyro");
             _gyroState = false;
-            Input.gyro.enabled = true;
         }
 
     }
@@ -42,7 +42,7 @@ public class GyroInputMapper : MonoBehaviour
             return instance._gyroRotationRate;
         }
     }
-    // Update is called once per frame
+    
     void Update()
     {
         _gyroRotationRate = Input.gyro.rotationRate;
