@@ -23,5 +23,14 @@ public class ParallaxManager : MonoBehaviour {
 
 	private void Start() {
 		instance = this;
+		if(!SystemInfo.supportsGyroscope)
+			enabled = false;
+	}
+
+	private void FixedUpdate() {
+		Gyroscope gyro = Input.gyro;
+
+		// Can't leave a bug like that.
+		//gyro.gravity
 	}
 }

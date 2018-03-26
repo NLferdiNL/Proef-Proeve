@@ -19,22 +19,10 @@ public class ParallaxObject : MonoBehaviour
             depth = transform.position.z;
 
         startPosition = transform.position;
-
-        if (GyroInputMapper.gyroState)
-            Debug.Log("Yay there is a gyro");
-        else
-            Debug.Log(":( no gyro -_-");
     }
 
     private void FixedUpdate()
     {
-        if (GyroInputMapper.gyroState)
-        {
-            transform.position = startPosition + transform.right * GyroInputMapper.GyroRotationRate.x * depth + transform.up * GyroInputMapper.GyroRotationRate.y * depth;
-        }
-        else
-        {
-            transform.position = startPosition + transform.right * ParallaxManager.XRot * depth + transform.up * ParallaxManager.YRot * depth;
-        }
+        transform.position = startPosition + transform.right * ParallaxManager.XRot * depth + transform.up * ParallaxManager.YRot * depth;
     }
 }

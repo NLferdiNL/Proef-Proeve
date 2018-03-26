@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depth: -1
-  useZ: 1
+  useZ: 0
 --- !u!1 &1668748013
 GameObject:
   m_ObjectHideFlags: 0
