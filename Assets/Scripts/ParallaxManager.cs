@@ -2,35 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParallaxManager : MonoBehaviour {
+public class ParallaxManager : MonoBehaviour
+{
 
-	[SerializeField]
-	private float xRot, yRot = 0;
+    [SerializeField]
+    private float xRot, yRot = 0;
 
-	private static ParallaxManager instance;
+    private Vector3 _gyroRotationRate;
 
-	public static float XRot {
-		get {
-			return instance.xRot;
-		}
-	}
+    private static ParallaxManager instance;
 
-	public static float YRot {
-		get {
-			return instance.yRot;
-		}
-	}
+    public static float XRot
+    {
+        get
+        {
+            return instance.xRot;
+        }
+    }
 
-	private void Start() {
-		instance = this;
-		if(!SystemInfo.supportsGyroscope)
-			enabled = false;
-	}
+    public static float YRot
+    {
+        get
+        {
+            return instance.yRot;
+        }
+    }
 
-	private void FixedUpdate() {
-		Gyroscope gyro = Input.gyro;
+    private void Start()
+    {
+        instance = this;
+        if (!SystemInfo.supportsGyroscope)
+            enabled = false;
+    }
 
-		// Can't leave a bug like that.
-		//gyro.gravity
-	}
+    private void FixedUpdate()
+    {
+        _gyroRotationRate = Input.gyro.rotationRate;
+    }
 }

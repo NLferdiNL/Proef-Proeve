@@ -23,6 +23,6 @@ public class ParallaxObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = startPosition + transform.right * ParallaxManager.XRot * depth + transform.up * ParallaxManager.YRot * depth;
+        transform.position = startPosition + transform.right * GyroInputMapper.GyroRotationRate.y * depth + transform.up * GyroInputMapper.GyroRotationRate.x * depth;
     }
 }
