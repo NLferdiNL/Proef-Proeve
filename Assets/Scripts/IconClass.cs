@@ -11,7 +11,7 @@ public class IconClass : MonoBehaviour {
 	private int amount;
 
 	[SerializeField]
-	private Image edgeMask, inner, visibleEdge;
+	private Image fillMask, fill, visibleEdge;
 
 	private bool active = true;
 
@@ -22,7 +22,7 @@ public class IconClass : MonoBehaviour {
 
 		set {
 			active = value;
-			visibleEdge.color = inner.color = active ? icon.Color : IconAssetData.Instance.InActiveColor;
+			visibleEdge.color = fill.color = active ? icon.Color : IconAssetData.Instance.InActiveColor;
 		}
 	}
 
@@ -44,7 +44,8 @@ public class IconClass : MonoBehaviour {
 	public void UpdateValues() {
 		Sprite newSprite = icon.Sprite;
 
-		edgeMask.sprite = visibleEdge.sprite = newSprite;
+		fillMask.sprite = icon.SpriteMask;
+		visibleEdge.sprite = newSprite;
 		newSprite = null;
 
 		switch(icon._Shading) {
@@ -59,11 +60,11 @@ public class IconClass : MonoBehaviour {
 				break;
 		}
 
-		inner.sprite = newSprite;
+		fill.sprite = newSprite;
 
 		Color newColor = icon.Color;
 
-		visibleEdge.color = inner.color = newColor;
+		visibleEdge.color = fill.color = newColor;
 
 		switch(amount) {
 			case 1:

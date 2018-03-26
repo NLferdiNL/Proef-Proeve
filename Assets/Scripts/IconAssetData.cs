@@ -43,13 +43,15 @@ public class IconAssetData : MonoBehaviour {
 
 		private int amount = 1;
 		private Sprite sprite;
+		private Sprite spriteMask;
 		private Color color;
 		private Shading shading;
 		private int index;
 
-		public IconData(int amount, Sprite sprite, Shading shading, Color color, int index = -1) {
+		public IconData(int amount, Sprite sprite, Sprite spriteMask, Shading shading, Color color, int index = -1) {
 			this.amount = amount;
 			this.sprite = sprite;
+			this.spriteMask = spriteMask;
 			this.shading = shading;
 			this.color = color;
 			this.index = index;
@@ -86,6 +88,12 @@ public class IconAssetData : MonoBehaviour {
 
 			set {
 				index = value;
+			}
+		}
+
+		public Sprite SpriteMask {
+			get {
+				return spriteMask;
 			}
 		}
 
@@ -195,6 +203,9 @@ public class IconAssetData : MonoBehaviour {
 	[SerializeField]
 	Sprite[] symbolSprites;
 
+	[SerializeField]
+	Sprite[] symbolMaskSprites;
+
 	public Sprite OpenShadingSprite {
 		get {
 			return openShadingSprite;
@@ -253,7 +264,9 @@ public class IconAssetData : MonoBehaviour {
 				break;
 		}
 
-		IconData iconData = new IconData(0, symbolSprites[UnityEngine.Random.Range(0, symbolSprites.Length)], shading, symbolColors[UnityEngine.Random.Range(0, symbolColors.Length)]);
+		int spriteInt = UnityEngine.Random.Range(0, symbolSprites.Length);
+
+		IconData iconData = new IconData(0, symbolSprites[spriteInt], symbolMaskSprites[spriteInt], shading, symbolColors[UnityEngine.Random.Range(0, symbolColors.Length)]);
 
 		if(!IconExists(iconData)) {
 			iconObjects.Add(iconData);
