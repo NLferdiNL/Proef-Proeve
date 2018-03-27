@@ -2,41 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParallaxManager : MonoBehaviour
-{
+public class ParallaxManager : MonoBehaviour {
 
-    [SerializeField]
-    private float xRot, yRot = 0;
+	[SerializeField]
+	private float xRot, yRot = 0;
 
-    private Vector3 _gyroRotationRate;
+	private static ParallaxManager instance;
 
-    private static ParallaxManager instance;
+	public static float XRot {
+		get {
+			if(!instance.enabled)
+				return 0;
 
-    public static float XRot
-    {
-        get
-        {
-            return instance.xRot;
-        }
-    }
+			return instance.xRot;
+		}
+	}
 
-    public static float YRot
-    {
-        get
-        {
-            return instance.yRot;
-        }
-    }
+	public static float YRot {
+		get {
+			if(!instance.enabled)
+				return 0;
 
-    private void Start()
-    {
-        instance = this;
-        if (!SystemInfo.supportsGyroscope)
-            enabled = false;
-    }
+			return instance.yRot;
+		}
+	}
 
-    private void FixedUpdate()
-    {
-        _gyroRotationRate = Input.gyro.rotationRate;
-    }
+	Vector3 offset = Vector3.zero;
+
+	private void Start() {
+		instance = this;
+		if(!SystemInfo.supportsGyroscope)
+			enabled = false;
+
+		Input.gyro.enabled = true;
+		offset = Input.gyro.gravity;
+	}
+
+	private void FixedUpdate() {
+		Vector3 gyroVector = Input.gyro.gravity - offset;
+		xRot = gyroVector.y;
+		yRot = gyroVector.z;
+	}
 }
