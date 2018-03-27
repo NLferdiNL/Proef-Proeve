@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class TimeKeeper : MonoBehaviour
 
     [SerializeField]
     private float _startTime = 100.5f;
+    [SerializeField]
+    private float _currentTime;
 
     // Use this for initialization
     void Start()
@@ -18,6 +21,7 @@ public class TimeKeeper : MonoBehaviour
         {
             Debug.Log("... Well Shit its not there");
         }
+        _currentTime = _startTime;
     }
 
     // Update is called once per frame
@@ -25,13 +29,23 @@ public class TimeKeeper : MonoBehaviour
     {
         _startTime -= Time.deltaTime;
 
-        if (_startTime < 50)
+        UpdateTimeText();
+        if (_currentTime < 50)
         {
-
+            Debug.Log("ohhhh u runnin out of time bud");
         }
-        else if (_startTime < 15)
+        else if (_currentTime < 15)
         {
-
+            Debug.Log("Good luck fam u got like 15 secconds");
         }
+        else if (_currentTime < 0)
+        {
+            Debug.Log("AAAND UR OUT!!! ");
+        }
+    }
+
+    private void UpdateTimeText()
+    {
+        _timeTextField.text = "Time: " + _currentTime;            
     }
 }

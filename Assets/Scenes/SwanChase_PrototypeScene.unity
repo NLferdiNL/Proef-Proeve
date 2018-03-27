@@ -1520,4 +1520,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9788fa906083624680cbb915fed4be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeTextField: {fileID: 0}
+  _timeTextField: {fileID: 1985877325}
+  _startTime: 100.5
