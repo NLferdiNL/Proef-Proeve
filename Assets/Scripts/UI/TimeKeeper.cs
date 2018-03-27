@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimeKeeper : MonoBehaviour
 {
+
+    public delegate void MyTimeKeeper(float CurrentTimer);
+    public static event MyTimeKeeper myTimeKeeper;
+
     [SerializeField]
     private Text _timeTextField;
 
@@ -14,7 +19,14 @@ public class TimeKeeper : MonoBehaviour
     [SerializeField]
     private float _currentTime;
 
-    // Use this for initialization
+
+    [SerializeField]
+    private float _WarningPhase = 50;
+    [SerializeField]
+    private float _DangerPhase = 15;
+    [SerializeField]
+    private float _EndPhase = 0;
+
     void Start()
     {
         if (!_timeTextField)
@@ -24,28 +36,34 @@ public class TimeKeeper : MonoBehaviour
         _currentTime = _startTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        _startTime -= Time.deltaTime;
-
+        _currentTime -= Time.deltaTime;
         UpdateTimeText();
-        if (_currentTime < 50)
+
+        if (myTimeKeeper != null)
         {
-            Debug.Log("ohhhh u runnin out of time bud");
-        }
-        else if (_currentTime < 15)
-        {
-            Debug.Log("Good luck fam u got like 15 secconds");
-        }
-        else if (_currentTime < 0)
-        {
-            Debug.Log("AAAND UR OUT!!! ");
+            if (_currentTime < _WarningPhase)
+            {
+                Debug.Log("ohhhh u runnin out of time bud");
+                myTimeKeeper(_EndPhase);
+            }
+            else if (_currentTime < _DangerPhase)
+            {
+                myTimeKeeper(_DangerPhase);
+                Debug.Log("Good luck fam u got like 15 secconds");
+            }
+            else if (_currentTime < _EndPhase)
+            {
+                myTimeKeeper(_EndPhase);
+                Debug.Log("AAAND UR OUT!!! ");
+                SceneManager.LoadScene("MainGame");//needs to be changed
+            }
         }
     }
 
     private void UpdateTimeText()
     {
-        _timeTextField.text = "Time: " + _currentTime;            
+        _timeTextField.text = "Time: " + _currentTime.ToString("#.00");
     }
 }
