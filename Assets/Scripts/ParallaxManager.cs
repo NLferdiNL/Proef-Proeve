@@ -11,26 +11,36 @@ public class ParallaxManager : MonoBehaviour {
 
 	public static float XRot {
 		get {
+			if(!instance.enabled)
+				return 0;
+
 			return instance.xRot;
 		}
 	}
 
 	public static float YRot {
 		get {
+			if(!instance.enabled)
+				return 0;
+
 			return instance.yRot;
 		}
 	}
+
+	Vector3 offset = Vector3.zero;
 
 	private void Start() {
 		instance = this;
 		if(!SystemInfo.supportsGyroscope)
 			enabled = false;
+
+		Input.gyro.enabled = true;
+		offset = Input.gyro.gravity;
 	}
 
 	private void FixedUpdate() {
-		Gyroscope gyro = Input.gyro;
-
-		// Can't leave a bug like that.
-		//gyro.gravity
+		Vector3 gyroVector = Input.gyro.gravity - offset;
+		xRot = gyroVector.y;
+		yRot = gyroVector.z;
 	}
 }

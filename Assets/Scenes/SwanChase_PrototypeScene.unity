@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 21188463}
   - component: {fileID: 21188465}
   - component: {fileID: 21188464}
+  - component: {fileID: 21188466}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -184,6 +185,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 21188462}
+--- !u!114 &21188466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 21188462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a4ad4d9d3f8784189972769c1ebc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 0.5
+  useZ: 0
 --- !u!1 &56960816
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +755,7 @@ GameObject:
   - component: {fileID: 464404704}
   - component: {fileID: 464404706}
   - component: {fileID: 464404705}
+  - component: {fileID: 464404707}
   m_Layer: 5
   m_Name: BackGround-Overlay
   m_TagString: Untagged
@@ -799,6 +814,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 464404703}
+--- !u!114 &464404707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464404703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a4ad4d9d3f8784189972769c1ebc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 0.5
+  useZ: 0
 --- !u!1 &476269661
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +892,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 121961154}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1165,8 +1193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a4ad4d9d3f8784189972769c1ebc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: -1
-  useZ: 1
+  depth: 0.1
+  useZ: 0
 --- !u!1 &1668748013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,6 +1419,7 @@ GameObject:
   - component: {fileID: 2110699284}
   - component: {fileID: 2110699285}
   - component: {fileID: 2110699286}
+  - component: {fileID: 2110699287}
   m_Layer: 5
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -1405,7 +1434,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2110699283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 478.5, y: 286.0495, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1434,10 +1463,13 @@ MonoBehaviour:
   - {r: 0.16470589, g: 0.84313726, b: 0.8666667, a: 1}
   inActiveColor: {r: 0, g: 1, b: 1, a: 1}
   symbolSprites:
-  - {fileID: 21300000, guid: 41e9bcb6040c0bd488d6d76ba3aea4f5, type: 3}
+  - {fileID: 21300000, guid: 90028d38a2912d7469049ddc931aa8e8, type: 3}
   - {fileID: 21300002, guid: 41e9bcb6040c0bd488d6d76ba3aea4f5, type: 3}
   - {fileID: 21300004, guid: 41e9bcb6040c0bd488d6d76ba3aea4f5, type: 3}
-  symbolMaskSprites: []
+  symbolMaskSprites:
+  - {fileID: 21300000, guid: 374aa8414f4df5842bddfb59e71af664, type: 3}
+  - {fileID: 21300002, guid: 41e9bcb6040c0bd488d6d76ba3aea4f5, type: 3}
+  - {fileID: 21300004, guid: 41e9bcb6040c0bd488d6d76ba3aea4f5, type: 3}
 --- !u!114 &2110699286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,3 +1485,16 @@ MonoBehaviour:
   - {fileID: 1668748017}
   - {fileID: 368801382}
   - {fileID: 1322644379}
+--- !u!114 &2110699287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110699283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c944758cf3c8d43a51cceb7e7e5489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xRot: 0
+  yRot: 0
