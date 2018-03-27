@@ -7,10 +7,13 @@ public class ScoreManager : MonoBehaviour {
 
 	public static Action OnBoardChange { get; private set; }
 
-	[SerializeField]
+    [SerializeField]
+    private int setScoreValue = 10;
+
+    [SerializeField]
 	Circle[] circles;
 
-	public static int Score { get; private set; }
+    public static int Score { get; private set; }
 
 	private void Start() {
 		OnBoardChange = BoardChanged;
@@ -25,7 +28,7 @@ public class ScoreManager : MonoBehaviour {
 
 			if(a.Active && b.Active && c.Active) {
 				if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
-					Score++;
+					Score += setScoreValue;
 					a.Active = b.Active = c.Active = false;
 					IconAssetData.Instance.RemoveIcon(a.Icon);
 					IconAssetData.Instance.RemoveIcon(b.Icon);
