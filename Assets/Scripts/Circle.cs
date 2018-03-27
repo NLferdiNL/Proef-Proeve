@@ -92,14 +92,6 @@ public class Circle : MonoBehaviour {
 		return index - iconsInCircle * (index / iconsInCircle);
 	}
 
-	public void UpdateRotation() {
-		float rotation = transform.rotation.z;
-
-		int newIndex = Mathf.RoundToInt(rotation / iconsInCircle);
-
-
-	}
-
 	// To replace a used up icon.
 	public void ReplaceIcon(int index) {
 		index = IndexWithOffset(index);
