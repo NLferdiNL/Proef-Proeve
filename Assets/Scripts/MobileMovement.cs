@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class MobileMovement : MonoBehaviour
 {
-    private Vector2 touchOrigin = -Vector2.one;
-    public int horizontal;
-    public int vertical;
+    private Vector3 touchOrigin = -Vector3.one;
+    public int depth;
 
     // Use this for initialization
     void Start()
@@ -18,7 +17,7 @@ public class MobileMovement : MonoBehaviour
     //FixedUpdate is called once per fixed time step
     void FixedUpdate()
     {
-        horizontal = 0; vertical = 0;
+        depth = 0;
         if (Input.touchCount > 0)
         {
             Touch myTouch = Input.touches[0];
@@ -29,19 +28,12 @@ public class MobileMovement : MonoBehaviour
             }
             else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
             {
-                Vector2 touchEnd = myTouch.position;
-                float x = touchEnd.x - touchOrigin.x;
-                float y = touchEnd.y - touchOrigin.y;
-                touchOrigin.x = -1;
+                Vector3 touchEnd = myTouch.position;
+                float z = touchEnd.z - touchOrigin.z;
 
-                if (Mathf.Abs(x) > Mathf.Abs(y))
-                {
-                    horizontal = x > 0 ? 1 : -1;
-                }
-                else
-                {
-                    vertical = y > 0 ? 1 : -1;
-                }
+                touchOrigin.z = -1;
+
+                depth = z > 0 ? 1 : -1;
             }
         }
     }
