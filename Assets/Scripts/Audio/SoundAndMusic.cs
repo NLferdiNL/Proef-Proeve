@@ -37,20 +37,17 @@ public class SoundAndMusic : MonoBehaviour
             
         }*/
     }
-    void Start()
-    {
-        PlayMusic(0);
-        PlaySfx(0);
-    }//Test
 
     public void PlayMusic(int pickMus)
     {
+        pickMus = 0;
         BackgroundMusic.clip = Music[pickMus];
         BackgroundMusic.Play();
     }
 
     public void PlaySfx(int pickSfx)
     {
+        pickSfx = 0;
         SoundEffectOne.clip = SoundEffects[pickSfx];
         SoundEffectOne.Play();
     }
