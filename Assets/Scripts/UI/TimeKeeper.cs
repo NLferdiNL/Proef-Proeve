@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class TimeKeeper : MonoBehaviour
 {
 
-    //public delegate void MyTimeKeeper(float CurrentTimer);
-    //public static event MyTimeKeeper myTimeKeeper;
+    public delegate void MyTimeKeeper(float CurrentTimer);
+    public static event MyTimeKeeper myTimeKeeper;
 
     [SerializeField]
     private Text _timeTextField;
@@ -29,7 +29,7 @@ public class TimeKeeper : MonoBehaviour
     {
         if (!_timeTextField)
         {
-            Debug.Log("... Well Shit its not there");
+            print("... Well Shit its not there");
         }
         _currentTime = _startTime;
     }
@@ -41,24 +41,23 @@ public class TimeKeeper : MonoBehaviour
 
         if (_currentTime < _NormalPhase && _currentTime > _WarningPhase)
         {
-            Debug.Log("all is good man plenty of time to go around: " + _currentTime);
-            //myTimeKeeper(_NormalPhase);
+            if (myTimeKeeper != null)
+                myTimeKeeper(_NormalPhase);
         }
         else if (_currentTime < _WarningPhase && _currentTime > _DangerPhase)
         {
-            Debug.Log("ohhhh u runnin out of time bud: " + _currentTime);
-            //myTimeKeeper(_WarningPhase);
+            if (myTimeKeeper != null)
+                myTimeKeeper(_WarningPhase);
         }
         else if (_currentTime < _DangerPhase && _currentTime > _EndPhase)
         {
-            Debug.Log("Good luck fam u got like 15 secconds: " + _currentTime);
-            //myTimeKeeper(_DangerPhase);
+            if (myTimeKeeper != null)
+                myTimeKeeper(_DangerPhase);
         }
         else if (_currentTime <= _EndPhase)
         {
-            //myTimeKeeper(_EndPhase);
-            Debug.Log("AAAND UR OUT!!! : " + _currentTime);
-            SceneManager.LoadScene("MainMenu");//needs to be changed
+            if (myTimeKeeper != null)
+                myTimeKeeper(_EndPhase);
         }
     }
 
