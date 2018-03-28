@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class TimeKeeper : MonoBehaviour
 {
 
-    public delegate void MyTimeKeeper(float CurrentTimer);
-    public static event MyTimeKeeper myTimeKeeper;
+    //public delegate void MyTimeKeeper(float CurrentTimer);
+    //public static event MyTimeKeeper myTimeKeeper;
 
     [SerializeField]
     private Text _timeTextField;
@@ -20,11 +20,9 @@ public class TimeKeeper : MonoBehaviour
     private float _currentTime;
 
 
-    [SerializeField]
+    private float _NormalPhase = 100;
     private float _WarningPhase = 50;
-    [SerializeField]
     private float _DangerPhase = 15;
-    [SerializeField]
     private float _EndPhase = 0;
 
     void Start()
@@ -41,29 +39,31 @@ public class TimeKeeper : MonoBehaviour
         _currentTime -= Time.deltaTime;
         UpdateTimeText();
 
-        if (myTimeKeeper != null)
+        if (_currentTime < _NormalPhase && _currentTime > _WarningPhase)
         {
-            if (_currentTime < _WarningPhase)
-            {
-                Debug.Log("ohhhh u runnin out of time bud");
-                myTimeKeeper(_EndPhase);
-            }
-            else if (_currentTime < _DangerPhase)
-            {
-                myTimeKeeper(_DangerPhase);
-                Debug.Log("Good luck fam u got like 15 secconds");
-            }
-            else if (_currentTime < _EndPhase)
-            {
-                myTimeKeeper(_EndPhase);
-                Debug.Log("AAAND UR OUT!!! ");
-                SceneManager.LoadScene("MainGame");//needs to be changed
-            }
+            Debug.Log("all is good man plenty of time to go around: " + _currentTime);
+            //myTimeKeeper(_NormalPhase);
+        }
+        else if (_currentTime < _WarningPhase && _currentTime > _DangerPhase)
+        {
+            Debug.Log("ohhhh u runnin out of time bud: " + _currentTime);
+            //myTimeKeeper(_WarningPhase);
+        }
+        else if (_currentTime < _DangerPhase && _currentTime > _EndPhase)
+        {
+            Debug.Log("Good luck fam u got like 15 secconds: " + _currentTime);
+            //myTimeKeeper(_DangerPhase);
+        }
+        else if (_currentTime <= _EndPhase)
+        {
+            //myTimeKeeper(_EndPhase);
+            Debug.Log("AAAND UR OUT!!! : " + _currentTime);
+            SceneManager.LoadScene("MainMenu");//needs to be changed
         }
     }
 
     private void UpdateTimeText()
     {
-        _timeTextField.text = "Time: " + _currentTime.ToString("#.00");
+        _timeTextField.text = "Time:    " + _currentTime.ToString("#.00");
     }
 }

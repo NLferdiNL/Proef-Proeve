@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 02439016900cb6f45895985b09ca3c23
+labels:
+- Sprite
 timeCreated: 1521678113
 licenseType: Free
 NativeFormatImporter:

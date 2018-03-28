@@ -11,7 +11,7 @@ public class ParallaxManager : MonoBehaviour {
 
 	public static float XRot {
 		get {
-			if(!instance.enabled)
+			//if(!instance.enabled)
 				return 0;
 
 			return instance.xRot;
@@ -20,7 +20,7 @@ public class ParallaxManager : MonoBehaviour {
 
 	public static float YRot {
 		get {
-			if(!instance.enabled)
+			//if(!instance.enabled)
 				return 0;
 
 			return instance.yRot;
