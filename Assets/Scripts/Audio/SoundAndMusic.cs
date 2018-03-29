@@ -13,8 +13,8 @@ public class SoundAndMusic : MonoBehaviour
     [SerializeField] private AudioSource SoundEffectOne;
 
     private int pickSfx;
+    private int Pick;
 
-    //public string AudioName;
 
     //public int PickMus; //Number in music array.
     //public int PickSfx; //Number in Sfx array.
@@ -32,28 +32,28 @@ public class SoundAndMusic : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
-        /*
-        foreach (AudioClip clip in AudioLibrary)
-        {
-            
-        }*/
-        PlayMusic(0);
     }
 
     public void PlayMusic(int pickMus)
     {
+        if (AudioListener.volume == 0)
+        {
+            AudioListener.volume = 1;
+        }
+        AudioListener.volume = VolumeSlider.HoldVolume;
         BackgroundMusic.clip = Music[pickMus];
         BackgroundMusic.Play();
     }
 
     public void PlaySfx()
     {
-        RandomSfx(0);
+        RandomSfx();
         SoundEffectOne.clip = SoundEffects[pickSfx];
         SoundEffectOne.Play();
     }
-    public void RandomSfx(int Pick)
+    public void RandomSfx()
     {
         Pick = Random.Range(0, SoundEffects.Length);
         pickSfx = Pick;
