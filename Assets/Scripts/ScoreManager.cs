@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour {
 		OnBoardChange = BoardChanged;
 		Score = 0;
 	}
-																	  
+
 	public void BoardChanged() {
 		for(int i = 0; i <= 6; i += 3) {
 			IconClass a = circles[0].GetIcon(i);
