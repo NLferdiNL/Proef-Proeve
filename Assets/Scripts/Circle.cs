@@ -97,7 +97,27 @@ public class Circle : MonoBehaviour {
 
 		int newIndex = Mathf.RoundToInt(rotation / iconsInCircle);
 
+		int newRotation = Round(Mathf.RoundToInt(rotation), rotationAngle);
+	}
 
+	int Round(int toRound, int toNearest) {
+		int low = RoundDown(toRound, toNearest);
+		int high = RoundUp(toRound, toNearest);
+
+		if(Mathf.Abs(low - toRound) < Mathf.Abs(high - toRound))
+			return low;
+		else
+			return high;
+	}
+
+	int RoundUp(int toRound, int toNearest) {
+		if(toRound % toNearest == 0)
+			return toRound;
+		return (toNearest - toRound % toNearest) + toRound;
+	}
+
+	int RoundDown(int toRound, int toNearest) {
+		return toRound - toRound % toNearest;
 	}
 
 	// To replace a used up icon.

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class IconClass : MonoBehaviour {
-	
+
 	[SerializeField, HideInInspector]
 	private IconAssetData.IconData icon;
 
@@ -66,7 +66,7 @@ public class IconClass : MonoBehaviour {
 
 		visibleEdge.color = fill.color = newColor;
 
-		switch(amount) {
+		/*switch(amount) {
 			case 1:
 
 				break;
@@ -76,6 +76,12 @@ public class IconClass : MonoBehaviour {
 			case 3:
 
 				break;
-		}
+		}*/
+	}
+
+	public void Disintegrate(out bool done) {
+		// do particle effect
+
+		done = true;
 	}
 }

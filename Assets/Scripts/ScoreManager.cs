@@ -21,6 +21,10 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	public void BoardChanged() {
+		StartCoroutine(BoardChanged_Int());
+	}
+
+	public IEnumerator BoardChanged_Int() {
 		for(int i = 0; i <= 6; i += 3) {
 			IconClass a = circles[0].GetIcon(i);
 			IconClass b = circles[1].GetIcon(i);
@@ -30,6 +34,15 @@ public class ScoreManager : MonoBehaviour {
 				if(IconAssetData.IconData.Set(a.Icon, b.Icon, c.Icon)) {
 					Score += setScoreValue;
 					a.Active = b.Active = c.Active = false;
+
+					bool aDone, bDone, cDone = false;
+
+					a.Disintegrate(out aDone);
+					b.Disintegrate(out bDone);
+					c.Disintegrate(out cDone);
+
+					yield return new WaitUntil(() => aDone && bDone && cDone);
+
 					IconAssetData.Instance.RemoveIcon(a.Icon);
 					IconAssetData.Instance.RemoveIcon(b.Icon);
 					IconAssetData.Instance.RemoveIcon(c.Icon);
