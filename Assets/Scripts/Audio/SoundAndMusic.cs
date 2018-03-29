@@ -36,6 +36,12 @@ public class SoundAndMusic : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Update()
+    {
+        PlayMusic(0);
+        PlaySfx();
+    }
+
     public void PlayMusic(int pickMus)
     {
         if (AudioListener.volume == 0)
