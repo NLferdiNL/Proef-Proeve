@@ -97,10 +97,10 @@ public class Circle : MonoBehaviour {
 
 		int newIndex = Mathf.RoundToInt(rotation / iconsInCircle);
 
-		int newRotation = Round(rotation, rotationAngle);
+		int newRotation = Round(Mathf.RoundToInt(rotation), rotationAngle);
 	}
 
-	int Round(float toRound, int toNearest) {
+	int Round(int toRound, int toNearest) {
 		int low = RoundDown(toRound, toNearest);
 		int high = RoundUp(toRound, toNearest);
 
